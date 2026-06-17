@@ -1,0 +1,24 @@
+[
+  {
+    "id": "cust-87428",
+    "name": "Arjun Kumar",
+    "email": "arjun.k@gmail.com",
+    "phone": "+91 98765 43210",
+    "panCard": "ABCDE1234F",
+    "notes": "Prefers premium wooden houseboats in Nigeen Lake rather than crowded Dal Lake. Enjoys mild saffron Kahwa tea and requested certified tourist guides for Gulmarg Gondola Phase 2.",
+    "totalBookings": 2,
+    "totalRevenue": 75000,
+    "lastActive": "2026-06-12T14:22:10.000Z"
+  },
+  {
+    "id": "cust-29402",
+    "name": "Fatimah Al-Mansoor",
+    "email": "fatimah.mansoor@yahoo.com",
+    "phone": "+971 50 123 4567",
+    "panCard": "FOREIGN-PASSPORT",
+    "notes": "International guest from Dubai, UAE. Requires custom luxury private 4x4 SUV charters. Strictly vegetarian organic meals during Pahalgam stays.",
+    "totalBookings": 1,
+    "totalRevenue": 110000,
+    "lastActive": "2026-06-14T09:15:30.000Z"
+  }
+]

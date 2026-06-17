@@ -1,0 +1,6 @@
+{
+  "name": "Sheenora Journeys",
+  "description": "Luxurious custom tourism packages for Jammu and Kashmir. Explore Srinagar, Gulmarg, Pahalgam, and offbeat locales.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

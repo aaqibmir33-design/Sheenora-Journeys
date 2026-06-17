@@ -1,0 +1,328 @@
+[
+  {
+    "id": "pkg-1",
+    "title": "Royal Kashmir Valley Luxury Escape",
+    "duration": "6 Nights / 7 Days",
+    "price": 27999,
+    "originalPrice": 41999,
+    "rating": 4.9,
+    "reviewsCount": 142,
+    "image": "https://images.unsplash.com/photo-1566837430227-7cd7b1b15804?auto=format&fit=crop&w=800&q=80",
+    "category": "Luxury",
+    "highlights": [
+      "Traditional Luxury Houseboat Stay on Dal Lake with Private Butler",
+      "Private Sunset Shikara Cruise with Kashmiri Kahwa service",
+      "VIP Gulmarg Gondola Ride (Phase 1 & Phase 2 tickets pre-booked)",
+      "Chauffeur-driven private luxury sedan escort throughout",
+      "Charming Riverside Picnic in Pahalgam on the banks of Lidder River"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival in Srinagar & Dal Lake Houseboat Experience",
+        "details": "Welcome to Srinagar, the summer capital! Meet our airport representative and transfer to your luxury carved cedar wood Houseboat. Enjoy an authentic 1-hour sunset Shikara ride across the tranquil floating gardens."
+      },
+      {
+        "day": 2,
+        "title": "Srinagar Mughal Gardens Heritage Tour",
+        "details": "Explore famous historical Mughal Gardens: Shalimar Bagh, Nishat Bagh, and Chashme Shahi. Take in the grand heritage fountains and centuries-old Chinar trees with background mountains."
+      },
+      {
+        "day": 3,
+        "title": "Srinagar to Gulmarg (Meadow of Flowers)",
+        "details": "Drive to Gulmarg, spectacular alpine pasture. Ride the highest cable car in Asia, the Gulmarg Gondola, up to Apharwat peak (Phase 2, 13,780 ft) for breathtaking views of Nanga Parbat."
+      },
+      {
+        "day": 4,
+        "title": "Gulmarg Leisure Exploration & Snow Sports",
+        "details": "Spend time at leisure in Gulmarg. Opt for skiing, snowboarding, or an escorted horseback ride through lush pine trails. Overnight stay in a heated alpine resort."
+      },
+      {
+        "day": 5,
+        "title": "Gulmarg to Pahalgam via Saffron Fields",
+        "details": "Journey to Pahalgam (Valley of Shepherds). En route, stop at the historical Saffron cultivation fields of Pampore and historic Awantipora ruins. Relax by the roaring Lidder River."
+      },
+      {
+        "day": 6,
+        "title": "Pahalgam Valley Tours (Aru, Betaab, & Chandanwari)",
+        "details": "Excursion to pristine Aru Valley, Betaab Valley (named after the Bollywood classic), and Chandanwari, the starting trail of the annual Amarnath pilgrimage."
+      },
+      {
+        "day": 7,
+        "title": "Pahalgam to Srinagar Airport Departure",
+        "details": "Transfer back to Srinagar Airport with beautiful memories and authentic Kashmiri walnut wood souvenirs provided by Sheenora Journeys."
+      }
+    ],
+    "inclusions": [
+      "1 Night Luxury Houseboat Stay with breakfast & dinner included",
+      "5 Nights Premium heated 4-star hotel stays (Gulmarg & Pahalgam)",
+      "Daily gourmet breakfast and local Wazwan-infused dinner",
+      "All airport transfers and local sightseeing in a private Luxury SUV",
+      "Pre-booked Phase 1 & 2 Gulmarg Gondola Entry passes"
+    ],
+    "exclusions": [
+      "Domestic Flights / Train ticket entry fares",
+      "Personal expenses such as tips, heater charges, additional meals",
+      "Premium adventure guides, optional hot-air balloon flights",
+      "Any costs due to unexpected weather landslides"
+    ],
+    "featured": true,
+    "seoDescription": "Experience J&K in ultra-luxury. Private Houseboat stays, pre-booked Gulmarg Gondola rides, and majestic Pahalgam excursions with Sheenora Journeys."
+  },
+  {
+    "id": "pkg-2",
+    "title": "Kashmiri Heritage & Honeymoon Haven",
+    "duration": "5 Nights / 6 Days",
+    "price": 23500,
+    "originalPrice": 32000,
+    "rating": 4.8,
+    "reviewsCount": 98,
+    "image": "https://images.unsplash.com/photo-1595185958742-1262cb40df3d?auto=format&fit=crop&w=800&q=80",
+    "category": "Honeymoon",
+    "highlights": [
+      "Complementary Suite decor, Saffron Almond milk & Honeyed Cake on arrival",
+      "Private candlelit dinner overlooking the floating lotus meadows of Nigeen Lake",
+      "Special couples Kashmiri Wazwan heritage tasting experience",
+      "Charming forest pony ride in Betaab Valley wood trails"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Welcome to Srinagar Houseboat Bliss",
+        "details": "Welcome with custom flower garlands. Transfer to a selected premium honeymoon houseboat. Enjoy decorated suites and a special sunset Shikara ride of Nigeen Lake."
+      },
+      {
+        "day": 2,
+        "title": "Romantic Tour of Old City & Heritage Shrine Walk",
+        "details": "Stroll down historic wood-carved lanes of Old Srinagar, visit Jamia Masjid, and the Shah-e-Hamdan wooden shrine. Savor Local bakery breads (Girda) with pink salted tea."
+      },
+      {
+        "day": 3,
+        "title": "Srinagar to Pahalgam Forest Escape",
+        "details": "Drive to Pahalgam. Check in to a premium riverview suite. Stroll through the romantic pine forest trails hand-in-hand."
+      },
+      {
+        "day": 4,
+        "title": "Baisaran 'Mini-Switzerland' Meadows Horseback Ride",
+        "details": "Ride horses through dense cedar woods to Baisaran meadow, an expansive hilltop glade with views of the snow-clad Pir Panjal range."
+      },
+      {
+        "day": 5,
+        "title": "Day Trip to Sonamarg - The Meadow of Gold",
+        "details": "Excursion to Sonamarg. Enjoy a spectacular trek or horse ride to Thajiwas Glacier, featuring permanent ice-sheets and gushing streams."
+      },
+      {
+        "day": 6,
+        "title": "Departure back to Srinagar Airport",
+        "details": "Savor your final breakfast together and take our driver's drop off to Srinagar Airport."
+      }
+    ],
+    "inclusions": [
+      "Luxury Houseboat and premium riverfront resort stays",
+      "Special floral bedroom decor and honeymoon wazwan dinner",
+      "All transfers in private sedan with experienced English/Hindi speaking driver",
+      "Local horse riding tickets & guide fees included"
+    ],
+    "exclusions": [
+      "Lunch, snacks, adventure sport activities",
+      "Tips and gratuities"
+    ],
+    "featured": true,
+    "seoDescription": "The ultimate romantic escape to Jammu & Kashmir. Premium Nigeen lake houseboats, candlelit Wazwan dinners, and beautiful alpine meadows."
+  },
+  {
+    "id": "pkg-3",
+    "title": "Offbeat Gurez & Lolab Valley Adventure",
+    "duration": "7 Nights / 8 Days",
+    "price": 26999,
+    "originalPrice": 35000,
+    "rating": 5.0,
+    "reviewsCount": 42,
+    "image": "https://images.unsplash.com/photo-1589136777351-fdc9c9400c7e?auto=format&fit=crop&w=800&q=80",
+    "category": "Offbeat",
+    "highlights": [
+      "Explore J&K's least footprint frontier - Gurez Valley along the Kishenganga River",
+      "Marvel at Habba Khatoon Peak - the legendary pyramid mountain of Kashmir",
+      "Stay in authentic wooden homestays in Dawar with Dardic Tribe interactions",
+      "Enjoy untouched cedar forests and crystal caves of Lolab Valley"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Srinagar Arrival & Bandipora Sunset",
+        "details": "Arrive in Srinagar, drive past the majestic vast Wular Lake to the foothills of Bandipora. Overnight local rest."
+      },
+      {
+        "day": 2,
+        "title": "Bandipora to Gurez Valley via Razdan Pass",
+        "details": "Ascend through pine forests to Razdan Pass (11,672 ft), offering panoramic Himalayan views. Descend into Gurez, checking into our partner Dawar rustic riverside wooden lodge."
+      },
+      {
+        "day": 3,
+        "title": "Habba Khatoon Mountain & Local Dard Tribe Walk",
+        "details": "Visit the majestic Habba Khatoon peak, name-inspired by the ancient poetess. Explore the wooden hamlets of Dawar and taste pure mountain potato cuisines."
+      },
+      {
+        "day": 4,
+        "title": "Prisital Border Village Exploration",
+        "details": "Excursion further deep towards the Last Border Outposts of Tulail. Hike down to pristine water brooks."
+      },
+      {
+        "day": 5,
+        "title": "Gurez Valley to Lolab Valley Forest Lodge",
+        "details": "Drive to Lolab Valley, often called the 'Land of Love'. Check in to a premium cedar cottage surrounded by lush paddy and apple orchards."
+      },
+      {
+        "day": 6,
+        "title": "Kalaroos Caves & Heritage Springs Hike",
+        "details": "Hike to Kalaroos Caves, featuring centuries-old archaeological stone structures once believed to lead to Russia."
+      },
+      {
+        "day": 7,
+        "title": "Lolab Valley back to Srinagar Dal Lake",
+        "details": "Return to Srinagar. Check-in to a luxury lake lodge. Enjoy a local shopping run for Pashminas."
+      },
+      {
+        "day": 8,
+        "title": "Departure",
+        "details": "Bid farewell to Srinagar. Fly home with stories of unexplored frontiers."
+      }
+    ],
+    "inclusions": [
+      "All inner line permits for restricted border zones pre-arranged",
+      "7 Nights cozy wooden homestays & standard mountain lodges",
+      "Breakfast & dinner featuring raw local mountain organics",
+      "Professional off-road 4x4 vehicle with expert local mountain pilot"
+    ],
+    "exclusions": [
+      "Anything not mentioned in inclusions, winter gear rentals"
+    ],
+    "featured": false,
+    "seoDescription": "Ditch the crowds. Travel to Dawar, Tulail, and Lolab. Explore Habba Khatoon peak with custom border permits arranged by Sheenora Journeys."
+  },
+  {
+    "id": "pkg-4",
+    "title": "Sacred J&K Pilgrimage & Amarnath Yatra",
+    "duration": "5 Nights / 6 Days",
+    "price": 22400,
+    "originalPrice": 29900,
+    "rating": 4.7,
+    "reviewsCount": 115,
+    "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+    "category": "Pilgrimage",
+    "highlights": [
+      "Smooth Amarnath Yatra helicopter services (Paltal/Baltal routes pre-assisted)",
+      "VIP darshan guidance at the sacred ice Shiva Lingam cave",
+      "Sacred temple tours including Shankracharya Hill & Khir Bhawani temple",
+      "Dedicated Satvik vegetarian diet meals prepared daily"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Srinagar Arrival & Shankaracharya Hill Worship",
+        "details": "Arrive in Srinagar and visit the historic ancient grey stone Shankaracharya temple built high on a mountaintop, overlooking Dal Lake."
+      },
+      {
+        "day": 2,
+        "title": "Srinagar to Baltal Basecamp via Kangan",
+        "details": "Journey alongside the roaring Sindh river to Baltal base camp. Acclimatize in modern secured, clean tent accommodations."
+      },
+      {
+        "day": 3,
+        "title": "Baltal to Amarnath Cave - Holy Darshan & Return",
+        "details": "Pre-booked early morning Helicopter ride (or trek) to Panchtarni, followed by a light trek to the holy Amarnath cave. Darshan of the sacred natural ice Shiva Lingam. Return to base."
+      },
+      {
+        "day": 4,
+        "title": "Baltal to Srinagar - Khir Bhawani Heritage",
+        "details": "Drive back to Srinagar. En route, visit the Holy Tullamulla temple of Mata Khir Bhawani. Rest in tourist resort."
+      },
+      {
+        "day": 5,
+        "title": "Hazratbal Mosque & Local Heritage Craft Walk",
+        "details": "Visit Hazratbal shrine housing the holy relic of Prophet Muhammad. Explore papier-mâché craft workshops in Srinagar."
+      },
+      {
+        "day": 6,
+        "title": "Final Departure",
+        "details": "Drop-off to Srinagar Airport for terminal fly-outs."
+      }
+    ],
+    "inclusions": [
+      "Standard helicopter token reservation backup",
+      "Standard heated spiritual guest houses and tent sites",
+      "Strictly Satvik vegetarian meals (no onion, no garlic options available)",
+      "Dedicated group guide for hassle-free holy queue entry"
+    ],
+    "exclusions": [
+      "Any individual donations, horse/palki charges, personal porter fees"
+    ],
+    "featured": false,
+    "seoDescription": "Secure your holy darshan. Specialized Baltic and Pahalgam route guides, Amarnath helicopter slot booking on Sheenora Journeys."
+  },
+  {
+    "id": "pkg-5",
+    "title": "Pir Panjal Heights & Alpine Trekking Quest",
+    "duration": "6 Nights / 7 Days",
+    "price": 17800,
+    "originalPrice": 24500,
+    "rating": 4.9,
+    "reviewsCount": 56,
+    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    "category": "Adventure",
+    "highlights": [
+      "Trek to the turquoise Great Alpine Lakes of Kashmir (Vishansar & Kishansar)",
+      "High altitude pine-glade camping under dense stargazing arrays",
+      "River trout fishing permits and equipment included",
+      "Trek fully assisted by certified local mountaineers and pack horses"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Departure Sonamarg Basecamp Setup",
+        "details": "Assemble in Sonamarg meadow. Set camp beside the scenic glacial waters of Thajiwas, meet mountain guides and run load-weight checks."
+      },
+      {
+        "day": 2,
+        "title": "Ascent to Nichnai Meadow Pass",
+        "details": "Ascend steep dirt trails passing dense birch forests, reaching High Altitude Nichnai Meadow (11,400 ft) for campfire night setups."
+      },
+      {
+        "day": 3,
+        "title": "Cross Nichnai Pass to Vishansar Turquoise Lake",
+        "details": "Trek crossing Nichnai Pass (13,400 ft), marveling at glaciated peaks. Descend into the spectacular vast valley of alpine lake Vishansar."
+      },
+      {
+        "day": 4,
+        "title": "Vishansar to Kishansar Alpine twin lakes",
+        "details": "Short steep climb to Kishansar lake. Enjoy high altitude angling, alpine trout cookouts, and cloud reflection captures."
+      },
+      {
+        "day": 5,
+        "title": "Descend back towards Sonamarg Woods",
+        "details": "Trek back safely via the meadows of Nichnai, enjoying standard scenic ridge downhill slides."
+      },
+      {
+        "day": 6,
+        "title": "Sonamarg back to Srinagar Cedar Retreat",
+        "details": "Dry up and wash in a heated traditional Srinagar guest lodge. Rejoice with traditional Lamb Rogan Josh / Kashmiri Dum Aloo dishes."
+      },
+      {
+        "day": 7,
+        "title": "Airport Transfers",
+        "details": "Farewells and drop-off utility transfers."
+      }
+    ],
+    "inclusions": [
+      "Premium quality weather-resistant alpine tents and sleeping pads",
+      "Qualified Wilderness First-Aid certified mountain instructors",
+      "Mules / horses to load collective kitchen and camping utensils",
+      "Local angling permits & fish gear setups"
+    ],
+    "exclusions": [
+      "Personal backpack carrying, personal trek gear/clothing rentals"
+    ],
+    "featured": true,
+    "seoDescription": "Trek J&K's legendary alpine lakes with Sheenora Journeys. Expert mountaineers, safe premium camping, and custom angling permits."
+  }
+]
