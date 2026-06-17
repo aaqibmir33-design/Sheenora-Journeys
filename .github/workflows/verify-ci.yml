@@ -19,10 +19,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install Workspace Dependencies
-        run: npm ci
+        run: npm ci || npm install
 
       - name: Execute TypeScript Linting
         run: npm run lint
