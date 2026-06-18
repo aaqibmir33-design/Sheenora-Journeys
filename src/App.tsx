@@ -60,6 +60,35 @@ import { TourPackage, Booking, Customer, GalleryItem } from './types.js';
 // @ts-ignore
 import sheenoraHeroImg from './assets/images/sheenora_hero_1781313712781.jpg';
 
+// --- Direct API Endpoint Helper ---
+export const getApiBaseUrl = () => {
+  // 1. Check for standard local or production overrides
+  const envUrl = (import.meta as any).env?.VITE_API_BASE_URL;
+  if (envUrl) {
+    return envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
+  }
+
+  // 2. Intelligently determine base URL based on host environment
+  const host = window.location.hostname;
+  
+  // If running locally
+  if (host === 'localhost' || host === '127.0.0.1') {
+    // If running in Vite development server (port 5173), direct queries to Express backend running on 3000
+    if (window.location.port === '5173') {
+      return 'http://localhost:3000';
+    }
+    return '';
+  }
+
+  // 3. Fallback for headless Netlify, Vercel, or custom static page hosts to connect live with pre-production backend
+  if (host.includes('netlify.app') || host.includes('vercel.app') || host.includes('github.io')) {
+    return 'https://ais-pre-rghhbuvxchifkxpazmoffn-399257180795.europe-west1.run.app';
+  }
+
+  // Same-origin default for built Express single-deploy environments
+  return '';
+};
+
 // --- Weather Helper Utilities & Icons ---
 const WeatherIcon = ({ name, className }: { name: string; className?: string }) => {
   switch (name) {
@@ -568,7 +597,7 @@ export default function App() {
 
     setNewsletterSubmitting(true);
     try {
-      const res = await fetch('/api/subscribe', {
+      const res = await fetch(`${getApiBaseUrl()}/api/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: newsletterEmail })
@@ -616,7 +645,7 @@ export default function App() {
     e.preventDefault();
     if (!editingPackage) return;
     try {
-      const res = await fetch(`/api/packages/${editingPackage.id}`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/packages/${editingPackage.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -642,7 +671,7 @@ export default function App() {
     e.preventDefault();
     if (!editingBooking) return;
     try {
-      const res = await fetch(`/api/bookings/${editingBooking.id}`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/bookings/${editingBooking.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -669,7 +698,7 @@ export default function App() {
     setWeatherLoading(true);
     setWeatherError(null);
     try {
-      const res = await fetch('/api/weather');
+      const res = await fetch(`${getApiBaseUrl()}/api/weather`);
       if (res.ok) {
         const data = await res.json();
         if (data.success) {
@@ -689,7 +718,7 @@ export default function App() {
 
   const fetchPackages = async () => {
     try {
-      const res = await fetch('/api/packages');
+      const res = await fetch(`${getApiBaseUrl()}/api/packages`);
       if (res.ok) {
         const data = await res.json();
         setPackages(data);
@@ -701,7 +730,7 @@ export default function App() {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch('/api/bookings');
+      const res = await fetch(`${getApiBaseUrl()}/api/bookings`);
       if (res.ok) {
         const data = await res.json();
         setBookings(data);
@@ -713,7 +742,7 @@ export default function App() {
 
   const fetchCustomers = async () => {
     try {
-      const res = await fetch('/api/customers');
+      const res = await fetch(`${getApiBaseUrl()}/api/customers`);
       if (res.ok) {
         const data = await res.json();
         setCustomers(data);
@@ -726,7 +755,7 @@ export default function App() {
   const fetchGallery = async () => {
     try {
       setGalleryLoading(true);
-      const res = await fetch('/api/gallery');
+      const res = await fetch(`${getApiBaseUrl()}/api/gallery`);
       if (res.ok) {
         const data = await res.json();
         setGallery(data);
@@ -740,7 +769,7 @@ export default function App() {
 
   const handleCreateGalleryItem = async (newItem: Omit<GalleryItem, 'id'>) => {
     try {
-      const res = await fetch('/api/gallery', {
+      const res = await fetch(`${getApiBaseUrl()}/api/gallery`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newItem),
@@ -764,7 +793,7 @@ export default function App() {
 
   const handleUpdateGalleryItem = async (id: string, updatedFields: Partial<GalleryItem>) => {
     try {
-      const res = await fetch(`/api/gallery/${id}`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/gallery/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedFields),
@@ -788,7 +817,7 @@ export default function App() {
 
   const handleDeleteGalleryItem = async (id: string) => {
     try {
-      const res = await fetch(`/api/gallery/${id}`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/gallery/${id}`, {
         method: 'DELETE',
       });
       if (res.ok) {
@@ -905,7 +934,7 @@ export default function App() {
 
   const updateCustomer = async (cust: Customer) => {
     try {
-      const res = await fetch(`/api/customers/${cust.id}`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/customers/${cust.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cust)
@@ -927,7 +956,7 @@ export default function App() {
 
   const deleteCustomer = async (id: string) => {
     try {
-      const res = await fetch(`/api/customers/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${getApiBaseUrl()}/api/customers/${id}`, { method: 'DELETE' });
       if (res.ok) {
         triggerNotification(
           language === 'HI' ? 'ग्राहक प्रोफ़ाइल को सुरक्षित रूप से हटा दिया गया।' : 'Customer profile removed from the secure ledger.',
@@ -944,7 +973,7 @@ export default function App() {
 
   const syncLeadToZoho = async (bookingId: string) => {
     try {
-      const res = await fetch(`/api/bookings/${bookingId}/sync`, { method: 'POST' });
+      const res = await fetch(`${getApiBaseUrl()}/api/bookings/${bookingId}/sync`, { method: 'POST' });
       if (res.ok) {
         triggerNotification(
           language === 'HI' ? 'कस्टमर लीड को जोहो सीआरएम के साथ सफलतापूर्वक सिंक कर दिया गया है!' : 'Customer lead dossier synchronized with Zoho CRM successfully!', 
@@ -964,7 +993,7 @@ export default function App() {
 
   const deleteBookingLead = async (bookingId: string) => {
     try {
-      const res = await fetch(`/api/bookings/${bookingId}`, { method: 'DELETE' });
+      const res = await fetch(`${getApiBaseUrl()}/api/bookings/${bookingId}`, { method: 'DELETE' });
       if (res.ok) {
         triggerNotification(
           language === 'HI' ? 'बुकिंग रिकॉर्ड सुरक्षित रूप से हटा दिया गया।' : 'Booking record successfully purged from server memory.', 
@@ -996,7 +1025,7 @@ export default function App() {
     setSearchedBookingGuide(null);
 
     try {
-      const res = await fetch(`/api/bookings-lookup/${idToSearch}`);
+      const res = await fetch(`${getApiBaseUrl()}/api/bookings-lookup/${idToSearch}`);
       const data = await res.json();
       if (res.ok && data.success) {
         setSearchedBooking(data.booking);
@@ -1046,7 +1075,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch('/api/custom-trip', {
+      const res = await fetch(`${getApiBaseUrl()}/api/custom-trip`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1117,7 +1146,7 @@ export default function App() {
     setPaymentLog(["Sending pre-reservation payload to Sheenora Secure Server...", "Generating custom itinerary invoice with J&K state tax breaks..."]);
     
     try {
-      const orderRes = await fetch('/api/payment/order', {
+      const orderRes = await fetch(`${getApiBaseUrl()}/api/payment/order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1154,7 +1183,7 @@ export default function App() {
       // Wait 3 seconds to simulate user interacting with Razorpay popup
       setTimeout(async () => {
         try {
-          const verifyRes = await fetch('/api/payment/verify', {
+          const verifyRes = await fetch(`${getApiBaseUrl()}/api/payment/verify`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1202,7 +1231,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch('/api/packages', {
+      const res = await fetch(`${getApiBaseUrl()}/api/packages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1260,7 +1289,7 @@ export default function App() {
   const handleDeletePackage = async (id: string) => {
     if (!confirm("Are you sure you would like to delete this Jammu & Kashmir itinerary from Sheenora's database?")) return;
     try {
-      const res = await fetch(`/api/packages/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${getApiBaseUrl()}/api/packages/${id}`, { method: 'DELETE' });
       if (res.ok) {
         triggerNotification("Package removed from tour catalog.", "info");
         fetchPackages();
