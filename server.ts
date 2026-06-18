@@ -4,7 +4,7 @@ import path from 'path';
 import crypto from 'crypto';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
-import { TourPackage, Booking, Customer } from './src/types.js';
+import { TourPackage, Booking, Customer, GalleryItem } from './src/types.js';
 
 dotenv.config();
 
@@ -14,6 +14,7 @@ const PORT = 3000;
 const PACKAGES_FILE = path.join(process.cwd(), 'data', 'packages.json');
 const BOOKINGS_FILE = path.join(process.cwd(), 'data', 'bookings.json');
 const CUSTOMERS_FILE = path.join(process.cwd(), 'data', 'customers.json');
+const GALLERY_FILE = path.join(process.cwd(), 'data', 'gallery.json');
 
 // Middlewares
 app.use(express.json());
@@ -122,9 +123,222 @@ function upsertCustomerDetails(name: string, email: string, phone: string, panCa
   saveCustomers(customers);
 }
 
+const DEFAULT_GALLERY: GalleryItem[] = [
+  {
+    id: "g-1",
+    title: "Dal Lake Houseboat Twilight",
+    url: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=800&q=80",
+    tags: ["Srinagar", "Houseboat", "Waterways", "Savor"],
+    location: "Dal Lake, Srinagar",
+    altitude: "1,585 meters",
+    lore: "Floating timber castles carved in aromatic Himalayan cedar. Watch the golden rays bounce off peaceful waters from your private hand-carved balcony."
+  },
+  {
+    id: "g-2",
+    title: "Shikara Ride & Floating Markets",
+    url: "https://images.unsplash.com/photo-1598325492994-01369c0d11c0?auto=format&fit=crop&w=800&q=80",
+    tags: ["Srinagar", "Shikara", "Culture", "Waterways"],
+    location: "Nigeen & Dal Lakes",
+    altitude: "1,586 meters",
+    lore: "Traditional wooden boats carrying vibrant flowers, fresh local produce, and warm saffron tea. An ancient marketplace humming peacefully at sunrise."
+  },
+  {
+    id: "g-3",
+    title: "Gulmarg Gondola & Peak Snow",
+    url: "https://images.unsplash.com/photo-1621532408376-78b17a6cfd74?auto=format&fit=crop&w=800&q=80",
+    tags: ["Gulmarg", "Snow", "Adventure", "Peaks"],
+    location: "Apharwat Peak, Gulmarg",
+    altitude: "4,390 meters",
+    lore: "The highest cable car in Asia rising through thick pine forests into deep pristine snow fields. A paradise for skiing fanatics and visual seekers."
+  },
+  {
+    id: "g-4",
+    title: "Gulmarg Meadows in Summer",
+    url: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+    tags: ["Gulmarg", "Meadows", "Green", "Nature"],
+    location: "Gulmarg Highlands",
+    altitude: "2,650 meters",
+    lore: "A majestic highland meadow blanketed in vibrant wild lupines, daisies, and bluebells. Surrounded by the snow-capped Pir Panjal mountain range."
+  },
+  {
+    id: "g-5",
+    title: "Sonamarg Glacier Waters",
+    url: "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&w=800&q=80",
+    tags: ["Sonamarg", "Glacier", "River", "Peaks"],
+    location: "Thajiwas Glacier, Sonamarg",
+    altitude: "2,740 meters",
+    lore: "Where emerald gushing alpine rivers meet ancient frozen glacial ice. Translated literally as the 'Meadow of Gold' due to golden autumn leaves."
+  },
+  {
+    id: "g-6",
+    title: "Pahalgam Valley & Lidder River",
+    url: "https://images.unsplash.com/photo-1616036740257-9449ea1f6605?auto=format&fit=crop&w=800&q=80",
+    tags: ["Pahalgam", "Valley", "River", "Nature"],
+    location: "Lidder Valley, Pahalgam",
+    altitude: "2,200 meters",
+    lore: "Crystal clear glacier streams cascading through towering pine valleys. A timeless shelter of pristine cedarwood paths and gentle mountain wind."
+  },
+  {
+    id: "g-7",
+    title: "Autumn Chinar Foliage",
+    url: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80",
+    tags: ["Chinar", "Autumn", "Srinagar", "Nature"],
+    location: "Nishat Bagh Mughal Garden",
+    altitude: "1,595 meters",
+    lore: "Centuries-old giant Chinar trees turning an intense, fiery crimson in November. The crown jewel of royal Kashmiri autumn landscapes."
+  },
+  {
+    id: "g-8",
+    title: "Pari Mahal Mughal Gardens",
+    url: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=800&q=80",
+    tags: ["Srinagar", "Garden", "Heritage", "Culture"],
+    location: "Zabarwan Range, Srinagar",
+    altitude: "1,680 meters",
+    lore: "The 'Palace of Fairies', a terraced seven-level garden complex built by ancient prince Dara Shikoh. Showcasing breathtaking panoramic observatory lake vistas."
+  },
+  {
+    id: "g-9",
+    title: "Amarnath Sacred Peaks",
+    url: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+    tags: ["Pilgrimage", "Peaks", "Trekking", "Adventure"],
+    location: "Amarnath Mountain Cave Range",
+    altitude: "3,888 meters",
+    lore: "A holy glacial sanctuary nestled inside snow-creased rocky mountain canyons, accessed via steep epic trails of high devotion and natural wonder."
+  },
+  {
+    id: "g-10",
+    title: "Doodhpathri Valley of Milk",
+    url: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80",
+    tags: ["Doodhpathri", "River", "Meadows", "Nature"],
+    location: "Doodhpathri Highlands",
+    altitude: "2,730 meters",
+    lore: "Gushing crystalline rivers crashing against grey pebbles, creating foam that resembles rich creamy milk. A quiet, pristine pasture land of sheep."
+  },
+  {
+    id: "g-11",
+    title: "Yusmarg Hidden Pine Forests",
+    url: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80",
+    tags: ["Yusmarg", "Forest", "Offbeat", "Nature"],
+    location: "Yusmarg Meadows",
+    altitude: "2,396 meters",
+    lore: "The 'Meadow of Jesus', believed to be one of the most serene pine-shrouded valleys where mountain silence is broken only by musical stream birds."
+  },
+  {
+    id: "g-12",
+    title: "Gurez Valley Borderland Forts",
+    url: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+    tags: ["Gurez", "Cabins", "Offbeat", "Adventure"],
+    location: "Dawr, Gurez Valley",
+    altitude: "2,400 meters",
+    lore: "A spectacular ultra-offbeat valley protected by the mighty Habba Khatoon peak. Home to ancestral wooden log cabins and remote Dardic culture vibes."
+  }
+];
+
+function loadGallery(): GalleryItem[] {
+  try {
+    if (fs.existsSync(GALLERY_FILE)) {
+      const data = fs.readFileSync(GALLERY_FILE, 'utf-8');
+      return JSON.parse(data);
+    } else {
+      // Initialize with default gallery
+      saveGallery(DEFAULT_GALLERY);
+      return DEFAULT_GALLERY;
+    }
+  } catch (error) {
+    console.error("Error loading gallery, using default gallery:", error);
+    return DEFAULT_GALLERY;
+  }
+}
+
+function saveGallery(gallery: GalleryItem[]) {
+  try {
+    const dir = path.dirname(GALLERY_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(GALLERY_FILE, JSON.stringify(gallery, null, 2), 'utf-8');
+  } catch (error) {
+    console.error("Error saving gallery:", error);
+  }
+}
+
 // ----------------------------------------------------
 // API ROUTES
 // ----------------------------------------------------
+
+// Gallery Photo Management APIs
+app.get('/api/gallery', (req, res) => {
+  const gallery = loadGallery();
+  res.json(gallery);
+});
+
+app.post('/api/gallery', (req, res) => {
+  const gallery = loadGallery();
+  const { title, url, tags, location, altitude, lore } = req.body;
+  
+  if (!title || !url) {
+    return res.status(400).json({ error: "Title and Image URL are required parameters." });
+  }
+
+  const processedTags = Array.isArray(tags) 
+    ? tags 
+    : (typeof tags === 'string' ? tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+
+  const newItem: GalleryItem = {
+    id: `g-${Date.now()}`,
+    title: String(title),
+    url: String(url),
+    tags: processedTags,
+    location: String(location || ""),
+    altitude: String(altitude || ""),
+    lore: String(lore || "")
+  };
+
+  gallery.push(newItem);
+  saveGallery(gallery);
+  res.status(201).json(newItem);
+});
+
+app.put('/api/gallery/:id', (req, res) => {
+  const gallery = loadGallery();
+  const { id } = req.params;
+  const itemIndex = gallery.findIndex(item => item.id === id);
+
+  if (itemIndex === -1) {
+    return res.status(404).json({ error: "Gallery item not found." });
+  }
+
+  const { title, url, tags, location, altitude, lore } = req.body;
+
+  if (title) gallery[itemIndex].title = String(title);
+  if (url) gallery[itemIndex].url = String(url);
+  
+  if (tags !== undefined) {
+    gallery[itemIndex].tags = Array.isArray(tags) 
+      ? tags 
+      : (typeof tags === 'string' ? tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+  }
+  
+  if (location !== undefined) gallery[itemIndex].location = String(location);
+  if (altitude !== undefined) gallery[itemIndex].altitude = String(altitude);
+  if (lore !== undefined) gallery[itemIndex].lore = String(lore);
+
+  saveGallery(gallery);
+  res.json(gallery[itemIndex]);
+});
+
+app.delete('/api/gallery/:id', (req, res) => {
+  const gallery = loadGallery();
+  const { id } = req.params;
+  const filtered = gallery.filter(item => item.id !== id);
+
+  if (filtered.length === gallery.length) {
+    return res.status(404).json({ error: "Gallery item not found." });
+  }
+
+  saveGallery(filtered);
+  res.json({ success: true, message: "Gallery photo removed successfully." });
+});
 
 // 1. Get all J&K package details
 app.get('/api/packages', (req, res) => {
@@ -143,7 +357,7 @@ app.post('/api/packages', (req, res) => {
     originalPrice: Number(req.body.originalPrice) || 30000,
     rating: 5.0,
     reviewsCount: 1,
-    image: req.body.image || 'https://images.unsplash.com/photo-1566837430227-7cd7b1b15804?auto=format&fit=crop&w=800&q=80',
+    image: req.body.image || 'https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=800&q=80',
     category: req.body.category || 'Luxury',
     highlights: req.body.highlights || [],
     itinerary: req.body.itinerary || [],

@@ -56,7 +56,7 @@ import {
   Download,
   FileSpreadsheet
 } from 'lucide-react';
-import { TourPackage, Booking, Customer } from './types.js';
+import { TourPackage, Booking, Customer, GalleryItem } from './types.js';
 // @ts-ignore
 import sheenoraHeroImg from './assets/images/sheenora_hero_1781313712781.jpg';
 
@@ -267,48 +267,99 @@ const translations = {
 export const KASHMIR_GALLERY = [
   {
     title: "Dal Lake Houseboat Twilight",
-    url: "https://images.unsplash.com/photo-1566837430227-7cd7b1b15804?auto=format&fit=crop&w=800&q=80",
-    tags: ["Srinagar", "Houseboat", "Water"]
+    url: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=800&q=80",
+    tags: ["Srinagar", "Houseboat", "Waterways", "Savor"],
+    location: "Dal Lake, Srinagar",
+    altitude: "1,585 meters",
+    lore: "Floating timber castles carved in aromatic Himalayan cedar. Watch the golden rays bounce off peaceful waters from your private hand-carved balcony."
   },
   {
     title: "Shikara Ride & Floating Markets",
-    url: "https://images.unsplash.com/photo-1543872084-c7bd3822856f?auto=format&fit=crop&w=800&q=80",
-    tags: ["Srinagar", "Shikara", "Culture"]
+    url: "https://images.unsplash.com/photo-1598325492994-01369c0d11c0?auto=format&fit=crop&w=800&q=80",
+    tags: ["Srinagar", "Shikara", "Culture", "Waterways"],
+    location: "Nigeen & Dal Lakes",
+    altitude: "1,586 meters",
+    lore: "Traditional wooden boats carrying vibrant flowers, fresh local produce, and warm saffron tea. An ancient marketplace humming peacefully at sunrise."
   },
   {
     title: "Gulmarg Gondola & Peak Snow",
-    url: "https://images.unsplash.com/photo-1588661142511-bda92aeb487a?auto=format&fit=crop&w=800&q=80",
-    tags: ["Gulmarg", "Snow", "Adventure"]
+    url: "https://images.unsplash.com/photo-1621532408376-78b17a6cfd74?auto=format&fit=crop&w=800&q=80",
+    tags: ["Gulmarg", "Snow", "Adventure", "Peaks"],
+    location: "Apharwat Peak, Gulmarg",
+    altitude: "4,390 meters",
+    lore: "The highest cable car in Asia rising through thick pine forests into deep pristine snow fields. A paradise for skiing fanatics and visual seekers."
   },
   {
     title: "Gulmarg Meadows in Summer",
-    url: "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&w=800&q=80",
-    tags: ["Gulmarg", "Meadows", "Green"]
+    url: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+    tags: ["Gulmarg", "Meadows", "Green", "Nature"],
+    location: "Gulmarg Highlands",
+    altitude: "2,650 meters",
+    lore: "A majestic highland meadow blanketed in vibrant wild lupines, daisies, and bluebells. Surrounded by the snow-capped Pir Panjal mountain range."
   },
   {
     title: "Sonamarg Glacier Waters",
-    url: "https://images.unsplash.com/photo-1598449356475-b9f71db7d847?auto=format&fit=crop&w=800&q=80",
-    tags: ["Sonamarg", "Glacier", "River"]
+    url: "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&w=800&q=80",
+    tags: ["Sonamarg", "Glacier", "River", "Peaks"],
+    location: "Thajiwas Glacier, Sonamarg",
+    altitude: "2,740 meters",
+    lore: "Where emerald gushing alpine rivers meet ancient frozen glacial ice. Translated literally as the 'Meadow of Gold' due to golden autumn leaves."
   },
   {
     title: "Pahalgam Valley & Lidder River",
     url: "https://images.unsplash.com/photo-1616036740257-9449ea1f6605?auto=format&fit=crop&w=800&q=80",
-    tags: ["Pahalgam", "Valley", "River"]
+    tags: ["Pahalgam", "Valley", "River", "Nature"],
+    location: "Lidder Valley, Pahalgam",
+    altitude: "2,200 meters",
+    lore: "Crystal clear glacier streams cascading through towering pine valleys. A timeless shelter of pristine cedarwood paths and gentle mountain wind."
   },
   {
     title: "Autumn Chinar Foliage",
-    url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-    tags: ["Chinar", "Autumn", "Srinagar"]
+    url: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80",
+    tags: ["Chinar", "Autumn", "Srinagar", "Nature"],
+    location: "Nishat Bagh Mughal Garden",
+    altitude: "1,595 meters",
+    lore: "Centuries-old giant Chinar trees turning an intense, fiery crimson in November. The crown jewel of royal Kashmiri autumn landscapes."
   },
   {
     title: "Pari Mahal Mughal Gardens",
-    url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
-    tags: ["Srinagar", "Garden", "Heritage"]
+    url: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=800&q=80",
+    tags: ["Srinagar", "Garden", "Heritage", "Culture"],
+    location: "Zabarwan Range, Srinagar",
+    altitude: "1,680 meters",
+    lore: "The 'Palace of Fairies', a terraced seven-level garden complex built by ancient prince Dara Shikoh. Showcasing breathtaking panoramic observatory lake vistas."
   },
   {
     title: "Amarnath Sacred Peaks",
-    url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
-    tags: ["Pilgrimage", "Peaks", "Trekking"]
+    url: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+    tags: ["Pilgrimage", "Peaks", "Trekking", "Adventure"],
+    location: "Amarnath Mountain Cave Range",
+    altitude: "3,888 meters",
+    lore: "A holy glacial sanctuary nestled inside snow-creased rocky mountain canyons, accessed via steep epic trails of high devotion and natural wonder."
+  },
+  {
+    title: "Doodhpathri Valley of Milk",
+    url: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80",
+    tags: ["Doodhpathri", "River", "Meadows", "Nature"],
+    location: "Doodhpathri Highlands",
+    altitude: "2,730 meters",
+    lore: "Gushing crystalline rivers crashing against grey pebbles, creating foam that resembles rich creamy milk. A quiet, pristine pasture land of sheep."
+  },
+  {
+    title: "Yusmarg Hidden Pine Forests",
+    url: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80",
+    tags: ["Yusmarg", "Forest", "Offbeat", "Nature"],
+    location: "Yusmarg Meadows",
+    altitude: "2,396 meters",
+    lore: "The 'Meadow of Jesus', believed to be one of the most serene pine-shrouded valleys where mountain silence is broken only by musical stream birds."
+  },
+  {
+    title: "Gurez Valley Borderland Forts",
+    url: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+    tags: ["Gurez", "Cabins", "Offbeat", "Adventure"],
+    location: "Dawr, Gurez Valley",
+    altitude: "2,400 meters",
+    lore: "A spectacular ultra-offbeat valley protected by the mighty Habba Khatoon peak. Home to ancestral wooden log cabins and remote Dardic culture vibes."
   }
 ];
 
@@ -317,6 +368,19 @@ export default function App() {
   const [packages, setPackages] = useState<TourPackage[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
+  const [gallery, setGallery] = useState<GalleryItem[]>(KASHMIR_GALLERY);
+  const [galleryLoading, setGalleryLoading] = useState<boolean>(true);
+  const [editingGalleryItem, setEditingGalleryItem] = useState<GalleryItem | null>(null);
+  const [showAddGalleryModal, setShowAddGalleryModal] = useState<boolean>(false);
+  const [newGalleryItem, setNewGalleryItem] = useState<Omit<GalleryItem, 'id'>>({
+    title: '',
+    url: '',
+    tags: [],
+    location: '',
+    altitude: '',
+    lore: ''
+  });
+  const [newGalleryTagsInput, setNewGalleryTagsInput] = useState<string>('');
   const [crmActiveTab, setCrmActiveTab] = useState<'bookings' | 'customers'>('bookings');
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null);
   const [customerSearchQuery, setCustomerSearchQuery] = useState<string>('');
@@ -332,6 +396,53 @@ export default function App() {
   
   // Filtering packages
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  // Public Photo Album state variables
+  const [activePhoto, setActivePhoto] = useState<any | null>(null);
+  const [photoFilter, setPhotoFilter] = useState<string>('All');
+  const [photoSearch, setPhotoSearch] = useState<string>('');
+
+  // Photo Album helper calculations & handlers
+  const filteredPhotos = gallery.filter((p) => {
+    const matchesSearch = p.title.toLowerCase().includes(photoSearch.toLowerCase()) || 
+      p.tags.some(t => t.toLowerCase().includes(photoSearch.toLowerCase())) ||
+      (p.location && p.location.toLowerCase().includes(photoSearch.toLowerCase()));
+    
+    if (photoFilter === 'All') return matchesSearch;
+    return matchesSearch && p.tags.some(t => t.toLowerCase() === photoFilter.toLowerCase());
+  });
+
+  const handleNextPhoto = () => {
+    if (!activePhoto) return;
+    const currentIndex = gallery.findIndex(p => p.url === activePhoto.url);
+    if (currentIndex === -1) return;
+    const nextIndex = (currentIndex + 1) % gallery.length;
+    setActivePhoto(gallery[nextIndex]);
+  };
+
+  const handlePrevPhoto = () => {
+    if (!activePhoto) return;
+    const currentIndex = gallery.findIndex(p => p.url === activePhoto.url);
+    if (currentIndex === -1) return;
+    const prevIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+    setActivePhoto(gallery[prevIndex]);
+  };
+
+  const handlePhotoInquire = (photo: any) => {
+    const region = photo.tags[0] || "Srinagar";
+    if (!customForm.destinations.includes(region)) {
+      setCustomForm({
+        ...customForm,
+        destinations: [...customForm.destinations, region]
+      });
+    }
+    const element = document.getElementById('trip-formulator');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setActivePhoto(null);
+    triggerNotification(`Destination ${region} has been added to your Custom Quote planner!`, 'success');
+  };
 
   // Currency switching state and helper function (1 USD = 83.5 INR mockup)
   const [currency, setCurrency] = useState<'INR' | 'USD'>('INR');
@@ -406,7 +517,7 @@ export default function App() {
     highlights: [] as string[],
     newHighlightInput: '',
     seoDescription: '',
-    image: 'https://images.unsplash.com/photo-1566837430227-7cd7b1b15804?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=800&q=80',
     inclusions: ['Luxury Stay', 'Daily Wazwan Buffet Breakfast', 'Private Cab Sightseeing'] as string[],
     newInclusionInput: '',
     exclusions: ['Flights or High Altitude Permits'] as string[],
@@ -609,6 +720,90 @@ export default function App() {
       }
     } catch (e) {
       console.error("Failed to fetch customers list", e);
+    }
+  };
+
+  const fetchGallery = async () => {
+    try {
+      setGalleryLoading(true);
+      const res = await fetch('/api/gallery');
+      if (res.ok) {
+        const data = await res.json();
+        setGallery(data);
+      }
+    } catch (e) {
+      console.error("Failed to fetch gallery from server", e);
+    } finally {
+      setGalleryLoading(false);
+    }
+  };
+
+  const handleCreateGalleryItem = async (newItem: Omit<GalleryItem, 'id'>) => {
+    try {
+      const res = await fetch('/api/gallery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newItem),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setGallery(prev => [...prev, data]);
+        triggerNotification('Photo added to gallery successfully.', 'success');
+        return true;
+      } else {
+        const err = await res.json();
+        triggerNotification(err.error || 'Failed to add photo.', 'error');
+        return false;
+      }
+    } catch (e) {
+      console.error(e);
+      triggerNotification('Network error adding photo.', 'error');
+      return false;
+    }
+  };
+
+  const handleUpdateGalleryItem = async (id: string, updatedFields: Partial<GalleryItem>) => {
+    try {
+      const res = await fetch(`/api/gallery/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedFields),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setGallery(prev => prev.map(item => item.id === id ? data : item));
+        triggerNotification('Gallery photo updated successfully.', 'success');
+        return true;
+      } else {
+        const err = await res.json();
+        triggerNotification(err.error || 'Failed to update photo.', 'error');
+        return false;
+      }
+    } catch (e) {
+      console.error(e);
+      triggerNotification('Network error updating photo.', 'error');
+      return false;
+    }
+  };
+
+  const handleDeleteGalleryItem = async (id: string) => {
+    try {
+      const res = await fetch(`/api/gallery/${id}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        setGallery(prev => prev.filter(item => item.id !== id));
+        triggerNotification('Gallery photo removed successfully.', 'success');
+        return true;
+      } else {
+        const err = await res.json();
+        triggerNotification(err.error || 'Failed to delete photo.', 'error');
+        return false;
+      }
+    } catch (e) {
+      console.error(e);
+      triggerNotification('Network error deleting photo.', 'error');
+      return false;
     }
   };
 
@@ -829,6 +1024,7 @@ export default function App() {
     fetchPackages();
     fetchBookings();
     fetchCustomers();
+    fetchGallery();
     fetchWeather();
   }, []);
 
@@ -1041,7 +1237,7 @@ export default function App() {
           highlights: [],
           newHighlightInput: '',
           seoDescription: '',
-          image: 'https://images.unsplash.com/photo-1566837430227-7cd7b1b15804?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=800&q=80',
           inclusions: ['Luxury Stay', 'Daily Wazwan Buffet Breakfast', 'Private Cab Sightseeing'],
           newInclusionInput: '',
           exclusions: ['Flights or High Altitude Permits'],
@@ -1141,7 +1337,7 @@ export default function App() {
       {/* Immersive Kashmir Full-Website Persistent Background Image */}
       <div className="fixed inset-0 -z-10 pointer-events-none select-none" id="kashmir-website-backdrop">
         <img 
-          src="https://images.unsplash.com/photo-1543872084-c7bd3822856f?auto=format&fit=crop&w=1920&q=80" 
+          src="https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=1920&q=80" 
           alt="Showing Kashmir Full Backdrop" 
           className="w-full h-full object-cover opacity-25 filter blur-[2px]" 
         />
@@ -1245,6 +1441,17 @@ export default function App() {
                       >
                         <Compass className="w-4 h-4 text-[#F4C430] shrink-0" />
                         {t('customItineraries')}
+                      </a>
+                      <a 
+                        href="#scenic-photo-album" 
+                        onClick={() => setShowThreeDotsMenu(false)}
+                        className="flex items-center gap-2.5 p-2 rounded-xl text-xs font-bold uppercase text-slate-700 hover:text-white hover:bg-[#002366] transition-all"
+                      >
+                        <svg className="w-4 h-4 text-[#F4C430] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {language === 'HI' ? 'दर्शनीय फोटो एलबम' : 'Scenic Photo Album'}
                       </a>
                       <a 
                         href="#heritage-diaries" 
@@ -2330,7 +2537,7 @@ export default function App() {
                       🖼️ Quick Imagery Picker (Pick Beautiful Pre-configured Kashmiri Photographs)
                     </span>
                     <div className="grid grid-cols-3 sm:grid-cols-9 gap-2.5 max-h-36 overflow-y-auto pr-1">
-                      {KASHMIR_GALLERY.map((g) => (
+                      {gallery.map((g) => (
                         <button
                           key={g.url}
                           type="button"
@@ -3112,6 +3319,309 @@ export default function App() {
             </div>
           </div>
         )}
+
+        {/* SECTION: SCENIC KASHMIR PHOTO ALBUM */}
+        <section id="scenic-photo-album" className="scroll-mt-24 space-y-8 relative z-10 bg-[#002366]/5 p-6 sm:p-10 rounded-3xl border border-slate-200/60">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div className="space-y-3">
+              <span className="text-[10px] font-mono uppercase bg-[#002366]/10 text-[#002366] px-3 py-1 rounded inline-block font-bold border border-[#002366]/10">
+                ✨ {language === 'HI' ? 'कश्मीर फोटोग्राफी एल्बम' : 'Kashmir Scenic Photo Album'}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#002366] tracking-tight">
+                {language === 'HI' ? 'अतुल्य दृश्य और सांस्कृतिक डायरी' : 'Unveiling Kashmir’s Visual Majesty'}
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 max-w-2xl leading-relaxed">
+                {language === 'HI' 
+                  ? 'श्रीनगर की शांत झीलों से लेकर गुलमर्ग की बर्फीली चोटियों तक, हमारे कश्मीरी स्थानीय गाइडों द्वारा कैप्चर किए गए सबसे जादुई कोनों की खोज करें।'
+                  : 'From the sapphire waterways of Dal Lake to the snow-creased colossal peaks of Apharwat, tour the absolute scenic best of Kashmir through our immersive photography vault.'}
+              </p>
+            </div>
+
+            {/* Photo Search and Filter Pill Container */}
+            <div className="relative w-full sm:w-80 shrink-0">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 pointer-events-none">
+                <Search className="w-4 h-4" />
+              </span>
+              <input
+                type="text"
+                placeholder={language === 'HI' ? 'जगह या टैग द्वारा खोजें...' : 'Filter photos by tag or spot...'}
+                value={photoSearch}
+                onChange={(e) => setPhotoSearch(e.target.value)}
+                className="w-full pl-10 pr-10 py-3 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#002366]/20 font-sans shadow-sm"
+              />
+              {photoSearch && (
+                <button 
+                  onClick={() => setPhotoSearch('')} 
+                  className="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {cmsMode && (
+            <div className="bg-orange-50 border-2 border-[#F4C430] rounded-2xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shadow-sm">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-[#002366]">
+                  <Lock className="w-4 h-4 text-[#002366]" />
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider">Sheenora Interactive Photo Gallery Manager Active</span>
+                </div>
+                <p className="text-[11px] text-slate-500 font-medium">As Admin, you can add new photographs, edit titles, locations, altitudes, and historical lore inline, or permanently purge photos without editing any code.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setNewGalleryItem({ title: '', url: '', tags: [], location: '', altitude: '', lore: '' });
+                  setNewGalleryTagsInput('');
+                  setShowAddGalleryModal(true);
+                }}
+                className="bg-[#002366] text-[#F4C430] hover:bg-white hover:text-[#002366] px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer border border-[#002366]/25 shadow-xs whitespace-nowrap self-end md:self-auto"
+              >
+                <Plus className="w-4 h-4 text-[#F4C430]" />
+                Add Photograph
+              </button>
+            </div>
+          )}
+
+          {/* Tag Filter Navigation */}
+          <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-slate-200">
+            {['All', 'Srinagar', 'Gulmarg', 'Pahalgam', 'Nature', 'Culture', 'Offbeat'].map((tag) => {
+              const isActive = photoFilter === tag;
+              return (
+                <button
+                  key={tag}
+                  onClick={() => setPhotoFilter(tag)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-[#002366] text-[#F4C430] shadow-md scale-[1.03]'
+                      : 'bg-white hover:bg-slate-250 text-slate-600 border border-slate-200'
+                  }`}
+                >
+                  {tag === 'All' ? (language === 'HI' ? 'सभी एल्बम' : 'All Spots') : tag}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Photos Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filteredPhotos.map((photo) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  key={photo.url}
+                  onClick={() => setActivePhoto(photo)}
+                  className="group bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:border-[#F4C430] cursor-pointer"
+                >
+                  <div className="relative aspect-video sm:aspect-[4/3] overflow-hidden bg-slate-100">
+                    <img
+                      src={photo.url}
+                      alt={photo.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300" />
+                    
+                    {/* Location Tag */}
+                    <div className="absolute top-3 left-3 flex items-center gap-1 px-2.5 py-1 bg-slate-900/85 backdrop-blur-md rounded-lg text-[9px] text-white font-mono font-medium border border-white/10 uppercase">
+                      <MapPin className="w-2.5 h-2.5 text-[#F4C430]" />
+                      {photo.location ? photo.location.split(',')[0] : 'Kashmir'}
+                    </div>
+
+                    {/* Admin Actions Overlay */}
+                    {cmsMode && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setEditingGalleryItem(photo);
+                          }}
+                          className="p-1.5 bg-white/95 text-[#002366] hover:bg-[#F4C430] hover:text-[#002366] rounded-lg transition-colors shadow-sm border border-slate-205 cursor-pointer"
+                          title="Edit Photo Details"
+                        >
+                          <Edit className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (window.confirm(language === 'HI' ? 'क्या आप वाकई इस तस्वीर को हटाना चाहते हैं?' : 'Are you sure you want to permanently delete this photo from the gallery?')) {
+                              handleDeleteGalleryItem(photo.id);
+                            }
+                          }}
+                          className="p-1.5 bg-white/95 text-red-650 hover:bg-red-600 hover:text-white rounded-lg transition-colors shadow-sm border border-red-200 cursor-pointer"
+                          title="Delete Photo"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    )}
+                    
+                    {/* Visual Hover Explore Button */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="px-4 py-2 bg-white/95 text-[#002366] font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg border border-[#F4C430] flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                        <Sparkles className="w-3.5 h-3.5 text-[#F4C430]" />
+                        {language === 'HI' ? 'अन्वेषण करें' : 'Details'}
+                      </span>
+                    </div>
+
+                    {/* Meta info Overlay always visible on bottom */}
+                    <div className="absolute bottom-3 left-3 right-3 text-white space-y-0.5">
+                      <p className="font-serif font-semibold text-sm tracking-tight drop-shadow-md truncate">{photo.title}</p>
+                      <div className="flex items-center justify-between text-[10px] text-slate-300 font-mono">
+                        <span>{photo.altitude || 'Himalayas'}</span>
+                        <span className="text-orange-300 text-[9px] font-bold uppercase py-0.5 px-1.5 rounded bg-white/10 border border-white/5">{photo.tags[0]}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
+            {filteredPhotos.length === 0 && (
+              <div className="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-slate-350 text-slate-400 space-y-3">
+                <Compass className="w-12 h-12 mx-auto text-slate-300 animate-spin-slow stroke-[1.2]" />
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold text-slate-700">{language === 'HI' ? 'कोई मेल खाने वाले फोटो नहीं मिले।' : 'No matches found in our kashmiri scenic diaries.'}</p>
+                  <p className="text-xs text-slate-400">Try checking different spellings or selecting another quick pill filter.</p>
+                </div>
+                <button 
+                  onClick={() => { setPhotoSearch(''); setPhotoFilter('All'); }}
+                  className="bg-[#002366]/5 hover:bg-[#002366]/10 text-[#002366] px-4 py-2 rounded-xl text-xs font-bold border border-[#002366]/10 transition-colors"
+                >
+                  Clear search filters
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* LIGHTBOX SLIDER MODAL */}
+          <AnimatePresence>
+            {activePhoto && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+              >
+                {/* Backdrop Click */}
+                <div className="absolute inset-0" onClick={() => setActivePhoto(null)} />
+
+                <motion.div
+                  initial={{ scale: 0.95, y: 15 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.95, y: 15 }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 180 }}
+                  className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden max-w-5xl w-full shadow-2xl relative z-10 grid grid-cols-1 md:grid-cols-12"
+                >
+                  {/* Left Column: Visual Saffron Sized Photo Media Frame */}
+                  <div className="md:col-span-7 relative aspect-video md:aspect-auto md:h-[500px] bg-black group/lightbox">
+                    <img
+                      src={activePhoto.url}
+                      alt={activePhoto.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover"
+                    />
+                    
+                    {/* Absolute navigation arrows on overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center pointer-events-none">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); handlePrevPhoto(); }}
+                        className="pointer-events-auto bg-black/75 hover:bg-[#F4C430] text-white hover:text-slate-950 w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-md cursor-pointer group-hover/lightbox:scale-105"
+                      >
+                        <span className="font-sans font-black text-sm">◀</span>
+                      </button>
+                      
+                      <div className="bg-slate-950/85 text-[10px] text-slate-300 px-3 py-1 rounded-full font-mono border border-white/5">
+                        {gallery.findIndex(p => p.url === activePhoto.url) + 1} / {gallery.length}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); handleNextPhoto(); }}
+                        className="pointer-events-auto bg-black/75 hover:bg-[#F4C430] text-white hover:text-slate-950 w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-md cursor-pointer group-hover/lightbox:scale-105"
+                      >
+                        <span className="font-sans font-black text-sm">▶</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Information, Lore, Coordinates & customized trigger action */}
+                  <div className="md:col-span-5 p-6 sm:p-8 flex flex-col justify-between text-white space-y-6">
+                    <div className="space-y-4">
+                      {/* Top closing option */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono uppercase bg-emerald-500/15 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-lg">
+                          🏞️ Kashmiri Scenic Diaries
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setActivePhoto(null)}
+                          className="w-7 h-7 rounded-full bg-slate-800 hover:bg-red-500 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h3 className="text-xl sm:text-2xl font-serif font-black text-white tracking-tight leading-snug">{activePhoto.title}</h3>
+                        <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-400">
+                          <span className="flex items-center gap-1 leading-tight">
+                            <MapPin className="w-3.5 h-3.5 text-[#F4C430]" />
+                            {activePhoto.location || 'Kashmir'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="border-t border-b border-slate-800 py-3.5 space-y-2">
+                        <p className="text-[10px] font-mono text-[#F4C430] uppercase tracking-wider font-bold">Heritage Lore & Guide Insights:</p>
+                        <p className="text-xs text-slate-300 leading-relaxed font-sans font-light">
+                          {activePhoto.lore || 'One of the most picturesque, peaceful territories nestled inside the majestic Himalayas. A timeless retreat of mountain beauty.'}
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 text-[10px] font-mono">
+                        <div className="bg-slate-800/40 p-2.5 border border-slate-800 rounded-xl space-y-0.5">
+                          <span className="text-slate-500 block uppercase font-bold text-[8px]">Scenic Altitude</span>
+                          <span className="text-[#F4C430] font-sans font-medium">{activePhoto.altitude || 'Mountain Peak'}</span>
+                        </div>
+                        <div className="bg-slate-800/40 p-2.5 border border-slate-800 rounded-xl space-y-0.5">
+                          <span className="text-slate-500 block uppercase font-bold text-[8px]">Photo Category</span>
+                          <span className="text-emerald-400 font-sans font-medium uppercase font-bold text-[9px]">{activePhoto.tags ? activePhoto.tags[0] : 'Kashmir'}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-800 space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => handlePhotoInquire(activePhoto)}
+                        className="w-full py-3 bg-[#F4C430] hover:bg-[#F4C430]/90 text-slate-900 font-sans font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <Compass className="w-4 h-4 shrink-0" />
+                        {language === 'HI' ? 'इस जगह के लिए टूर प्लान करें' : 'Plan Trip To This Spot'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActivePhoto(null)}
+                        className="w-full py-2 bg-slate-800 hover:bg-slate-750 text-slate-300 font-sans text-xs uppercase rounded-xl transition-all cursor-pointer"
+                      >
+                        {language === 'HI' ? 'वापस जाएँ' : 'Back to Diaries'}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </section>
 
         {/* SECTION: KASHMIRI ENRICHING HERITAGE DIARIES */}
         <section id="heritage-diaries" className="bg-white rounded-3xl p-8 sm:p-12 shadow-md border border-slate-200/80 scroll-mt-24 space-y-8 relative overflow-hidden">
@@ -3942,6 +4452,8 @@ export default function App() {
               <span>•</span>
               <a href="#trip-formulator" className="hover:text-white">Customizer</a>
               <span>•</span>
+              <a href="#scenic-photo-album" className="hover:text-white font-semibold text-[#F4C430]">Scenic Photo Album</a>
+              <span>•</span>
               <a href="#contact-desk" className="hover:text-white">Google Maps Desk</a>
             </div>
           </div>
@@ -4145,7 +4657,7 @@ export default function App() {
                           referrerPolicy="no-referrer"
                           className="w-full h-32 object-cover rounded-xl border border-slate-205 mx-auto"
                           onError={(e) => {
-                            e.currentTarget.src = "https://images.unsplash.com/photo-1566837430227-7cd7b1b15804?auto=format&fit=crop&w=800&q=80";
+                            e.currentTarget.src = "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=800&q=80";
                           }}
                         />
                       </div>
@@ -4594,6 +5106,299 @@ export default function App() {
         </a>
       </div>
 
+      {/* SECTION: ADMIN ADD PHOTO MODAL */}
+      {showAddGalleryModal && (
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto font-sans">
+          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full border-2 border-[#002366] p-6 text-slate-900 relative animate-fade-in my-8 max-h-[90vh] overflow-y-auto">
+            <button 
+              type="button"
+              onClick={() => setShowAddGalleryModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 rounded-full p-1.5 transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="p-2 bg-[#002366]/5 text-[#002366] rounded-xl border border-[#002366]/10">
+                  <Plus className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold font-serif text-[#002366] text-left">
+                    {language === 'HI' ? 'नया गैलरी चित्र जोड़ें' : 'Add New Photograph to Gallery'}
+                  </h4>
+                  <p className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 text-left">
+                    SaaS Destination Management Module
+                  </p>
+                </div>
+              </div>
+
+              <form 
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const tagsArr = newGalleryTagsInput.split(',').map(t => t.trim()).filter(Boolean);
+                  const success = await handleCreateGalleryItem({
+                    ...newGalleryItem,
+                    tags: tagsArr
+                  });
+                  if (success) {
+                    setShowAddGalleryModal(false);
+                  }
+                }} 
+                className="space-y-4 text-left"
+              >
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'तस्वीर का शीर्षक' : 'Photo Title *'}
+                    </label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. Majestic Sunset over Shalimar Bagh"
+                      value={newGalleryItem.title}
+                      onChange={(e) => setNewGalleryItem({ ...newGalleryItem, title: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'चित्र यूआरएल' : 'Unsplash / Image URL *'}
+                    </label>
+                    <input 
+                      type="url" 
+                      required
+                      placeholder="e.g. https://images.unsplash.com/photo-..."
+                      value={newGalleryItem.url}
+                      onChange={(e) => setNewGalleryItem({ ...newGalleryItem, url: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366] font-mono"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                        {language === 'HI' ? 'सटीक स्थान' : 'Exact Location'}
+                      </label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. Shalimar Bagh, Srinagar"
+                        value={newGalleryItem.location}
+                        onChange={(e) => setNewGalleryItem({ ...newGalleryItem, location: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                        {language === 'HI' ? 'ऊंचाई' : 'Altitude (Elevation)'}
+                      </label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. 1,620 meters"
+                        value={newGalleryItem.altitude}
+                        onChange={(e) => setNewGalleryItem({ ...newGalleryItem, altitude: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'टैग (अल्पविराम से अलग करें)' : 'Spill Spot Tags (Comma Separated) *'}
+                    </label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. Srinagar, Garden, Culture, Nature"
+                      value={newGalleryTagsInput}
+                      onChange={(e) => setNewGalleryTagsInput(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                    />
+                    <p className="text-[9px] text-slate-400 mt-1">Suggested key spot categories: Srinagar, Gulmarg, Pahalgam, Nature, Culture, Offbeat.</p>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'ऐतिहासिक और सांस्कृतिक विवरण' : 'Heritage Lore & Cultural Story'}
+                    </label>
+                    <textarea 
+                      rows={3}
+                      placeholder="Write a charming paragraph describing this location's history, sights, flora, or sensory experiences..."
+                      value={newGalleryItem.lore}
+                      onChange={(e) => setNewGalleryItem({ ...newGalleryItem, lore: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366] resize-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+                  <button 
+                    type="button"
+                    onClick={() => setShowAddGalleryModal(false)}
+                    className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit"
+                    className="px-5 py-2 text-xs font-bold text-white bg-[#002366] hover:bg-[#002366]/90 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <Save className="w-3.5 h-3.5" />
+                    Publish Photograph
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SECTION: ADMIN EDIT PHOTO MODAL */}
+      {editingGalleryItem && (
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto font-sans">
+          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full border-2 border-[#002366] p-6 text-slate-900 relative animate-fade-in my-8 max-h-[90vh] overflow-y-auto">
+            <button 
+              type="button"
+              onClick={() => setEditingGalleryItem(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 rounded-full p-1.5 transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <div className="p-2 bg-[#002366]/5 text-[#002366] rounded-xl border border-[#002366]/10">
+                  <Edit className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold font-serif text-[#002366] text-left">
+                    {language === 'HI' ? 'चित्र विवरण संपादित करें' : 'Edit Photograph Metadata'}
+                  </h4>
+                  <p className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 text-left">
+                    ID Reference: {editingGalleryItem.id}
+                  </p>
+                </div>
+              </div>
+
+              <form 
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const success = await handleUpdateGalleryItem(editingGalleryItem.id, editingGalleryItem);
+                  if (success) {
+                    setEditingGalleryItem(null);
+                  }
+                }} 
+                className="space-y-4 text-left"
+              >
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'शीर्षक' : 'Photo Title'}
+                    </label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. Scenic Chinar Canopy"
+                      value={editingGalleryItem.title}
+                      onChange={(e) => setEditingGalleryItem({ ...editingGalleryItem, title: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'चित्र यूआरएल' : 'Unsplash / Image URL'}
+                    </label>
+                    <input 
+                      type="url" 
+                      required
+                      placeholder="e.g. https://images.unsplash.com/photo-..."
+                      value={editingGalleryItem.url}
+                      onChange={(e) => setEditingGalleryItem({ ...editingGalleryItem, url: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366] font-mono"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                        {language === 'HI' ? 'स्थान' : 'Location'}
+                      </label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. Dal Lake, Srinagar"
+                        value={editingGalleryItem.location}
+                        onChange={(e) => setEditingGalleryItem({ ...editingGalleryItem, location: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                        {language === 'HI' ? 'ऊंचाई' : 'Altitude'}
+                      </label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. 1,585 meters"
+                        value={editingGalleryItem.altitude}
+                        onChange={(e) => setEditingGalleryItem({ ...editingGalleryItem, altitude: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'टैग (अल्पविराम से संयोजित)' : 'Tags (Comma Separated)'}
+                    </label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. Srinagar, Houseboat, Waterways"
+                      value={Array.isArray(editingGalleryItem.tags) ? editingGalleryItem.tags.join(', ') : editingGalleryItem.tags}
+                      onChange={(e) => setEditingGalleryItem({ 
+                        ...editingGalleryItem, 
+                        tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) 
+                      })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                      {language === 'HI' ? 'ऐतिहासिक और सांस्कृतिक विवरण' : 'Heritage Lore & Insights'}
+                    </label>
+                    <textarea 
+                      rows={4}
+                      placeholder="Description of the location..."
+                      value={editingGalleryItem.lore || ''}
+                      onChange={(e) => setEditingGalleryItem({ ...editingGalleryItem, lore: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#002366] resize-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+                  <button 
+                    type="button"
+                    onClick={() => setEditingGalleryItem(null)}
+                    className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit"
+                    className="px-5 py-2 text-xs font-bold text-white bg-[#002366] hover:bg-[#002366]/90 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <Save className="w-3.5 h-3.5" />
+                    Save Metadata Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

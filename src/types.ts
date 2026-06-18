@@ -63,3 +63,13 @@ export interface Customer {
   totalRevenue: number;
   lastActive: string;
 }
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  url: string;
+  tags: string[];
+  location: string;
+  altitude: string;
+  lore: string;
+}
