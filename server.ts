@@ -814,7 +814,12 @@ async function startServer() {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      const indexCapitalPath = path.join(distPath, 'Index.html');
+      if (fs.existsSync(indexCapitalPath)) {
+        res.sendFile(indexCapitalPath);
+      } else {
+        res.sendFile(path.join(distPath, 'index.html'));
+      }
     });
   }
 
