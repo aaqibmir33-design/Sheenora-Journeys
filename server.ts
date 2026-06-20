@@ -4,7 +4,7 @@ import path from 'path';
 import crypto from 'crypto';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
-import { TourPackage, Booking, Customer, GalleryItem } from './src/types.js';
+import { TourPackage, Booking, Customer, GalleryItem, TestimonialReview } from './src/types.js';
 
 dotenv.config();
 
@@ -15,6 +15,7 @@ const PACKAGES_FILE = path.join(process.cwd(), 'data', 'packages.json');
 const BOOKINGS_FILE = path.join(process.cwd(), 'data', 'bookings.json');
 const CUSTOMERS_FILE = path.join(process.cwd(), 'data', 'customers.json');
 const GALLERY_FILE = path.join(process.cwd(), 'data', 'gallery.json');
+const REVIEWS_FILE = path.join(process.cwd(), 'data', 'reviews.json');
 
 // Middlewares
 app.use(express.json());
@@ -101,6 +102,30 @@ function saveCustomers(customers: Customer[]) {
     fs.writeFileSync(CUSTOMERS_FILE, JSON.stringify(customers, null, 2), 'utf-8');
   } catch (error) {
     console.error("Error saving customers:", error);
+  }
+}
+
+function loadReviews(): TestimonialReview[] {
+  try {
+    if (fs.existsSync(REVIEWS_FILE)) {
+      const data = fs.readFileSync(REVIEWS_FILE, 'utf-8');
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.error("Error loading reviews, using empty array:", error);
+  }
+  return [];
+}
+
+function saveReviews(reviews: TestimonialReview[]) {
+  try {
+    const dir = path.dirname(REVIEWS_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(REVIEWS_FILE, JSON.stringify(reviews, null, 2), 'utf-8');
+  } catch (error) {
+    console.error("Error saving reviews:", error);
   }
 }
 
@@ -349,6 +374,54 @@ app.delete('/api/gallery/:id', (req, res) => {
 
   saveGallery(filtered);
   res.json({ success: true, message: "Gallery photo removed successfully." });
+});
+
+// Reviews & Testimonials section endpoints
+app.get('/api/reviews', (req, res) => {
+  const reviews = loadReviews();
+  res.json(reviews);
+});
+
+app.post('/api/reviews', (req, res) => {
+  const reviews = loadReviews();
+  const packages = loadPackages();
+  
+  const { packageId, customerName, rating, reviewText, travelDate } = req.body;
+  
+  if (!packageId || !customerName || !rating || !reviewText) {
+    return res.status(400).json({ error: "Missing required fields for package review." });
+  }
+  
+  const ratingNum = Math.max(1, Math.min(5, Number(rating)));
+  
+  const newReview: TestimonialReview = {
+    id: `rev-${Date.now()}`,
+    packageId,
+    customerName,
+    rating: ratingNum,
+    reviewText,
+    travelDate: travelDate || new Date().toLocaleString('default', { month: 'long', year: 'numeric' }),
+    createdAt: new Date().toISOString()
+  };
+  
+  reviews.unshift(newReview);
+  saveReviews(reviews);
+  
+  // Recalculate rating and reviewsCount with a weighted average
+  const pkgIndex = packages.findIndex(p => p.id === packageId);
+  if (pkgIndex !== -1) {
+    const currentReviewsCount = packages[pkgIndex].reviewsCount || 0;
+    const currentRating = packages[pkgIndex].rating || 5.0;
+    
+    const newCount = currentReviewsCount + 1;
+    const newRating = ((currentRating * currentReviewsCount) + ratingNum) / newCount;
+    
+    packages[pkgIndex].rating = Math.round(newRating * 10) / 10;
+    packages[pkgIndex].reviewsCount = newCount;
+    savePackages(packages);
+  }
+  
+  res.status(201).json({ success: true, reviews, packages });
 });
 
 // 1. Get all J&K package details

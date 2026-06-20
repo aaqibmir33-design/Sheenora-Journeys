@@ -1,0 +1,56 @@
+[
+  {
+    "id": "rev-1",
+    "packageId": "pkg-1",
+    "customerName": "Amit Sharma",
+    "rating": 5,
+    "reviewText": "Absolutely magical experience! The Dal Lake houseboat stay was like living in a floating wooden palace. Our driver was incredibly polite and took us to beautiful hidden meadows in Pahalgam. Worth every single rupee!",
+    "travelDate": "May 2026",
+    "createdAt": "2026-05-12T14:30:00.000Z"
+  },
+  {
+    "id": "rev-2",
+    "packageId": "pkg-1",
+    "customerName": "Deepika Iyer",
+    "rating": 5,
+    "reviewText": "Amazing hospitality! The VIP Gulmarg Gondola queue mitigation was a lifesaver. We bypassed the huge lines completely. Saffron tea from local sellers atop Phase 2 was unforgettable.",
+    "travelDate": "June 2026",
+    "createdAt": "2026-06-10T09:15:00.000Z"
+  },
+  {
+    "id": "rev-3",
+    "packageId": "pkg-2",
+    "customerName": "Suresh & Priya Sen",
+    "rating": 5,
+    "reviewText": "Our honeymoon was made extremely special by Sheenora. From local almond tea (Kahwa) on arrival to our lovely candlelit dinner overlooking Nigeen Lake, everything was tailored flawlessly.",
+    "travelDate": "June 2026",
+    "createdAt": "2026-06-03T11:20:00.000Z"
+  },
+  {
+    "id": "rev-4",
+    "packageId": "pkg-3",
+    "customerName": "Rohan Deshmukh",
+    "rating": 5,
+    "reviewText": "Gurez Valley represents alpine J&K untouched by mainstream crowds. The wooden Dardic tribal homestay felt warmer than fine hotels. Habba Khatoon peak at dawn is a masterpiece.",
+    "travelDate": "April 2026",
+    "createdAt": "2026-04-18T09:12:00.000Z"
+  },
+  {
+    "id": "rev-5",
+    "packageId": "pkg-4",
+    "customerName": "Pandit Rajkumar Swamy",
+    "rating": 5,
+    "reviewText": "Perfect Satvik culinary team and peaceful helicopters. Everything was handled with high devotional respect. Shankracharya Hill darshan was pristine.",
+    "travelDate": "May 2026",
+    "createdAt": "2026-05-28T16:40:00.000Z"
+  },
+  {
+    "id": "rev-6",
+    "packageId": "pkg-5",
+    "customerName": "Clara Jenkins",
+    "rating": 5,
+    "reviewText": "Himalayan trekking at its best. Safe local guides, professional camping tents, and stunning turquoise twin alpine lakes! Will visit J&K again soon.",
+    "travelDate": "June 2026",
+    "createdAt": "2026-06-15T18:22:00.000Z"
+  }
+]

@@ -58,7 +58,7 @@ import {
   Crown,
   Trophy
 } from 'lucide-react';
-import { TourPackage, Booking, Customer, GalleryItem } from './types.js';
+import { TourPackage, Booking, Customer, GalleryItem, TestimonialReview } from './types.js';
 // @ts-ignore
 import sheenoraHeroImg from './assets/images/sheenora_hero_1781313712781.jpg';
 
@@ -423,6 +423,18 @@ export default function App() {
   const [weatherData, setWeatherData] = useState<any[]>([]);
   const [weatherLoading, setWeatherLoading] = useState<boolean>(true);
   const [weatherError, setWeatherError] = useState<string | null>(null);
+
+  // Testimonial Reviews state variables
+  const [reviews, setReviews] = useState<TestimonialReview[]>([]);
+  const [submitReviewForm, setSubmitReviewForm] = useState({
+    packageId: '',
+    customerName: '',
+    rating: 5,
+    reviewText: '',
+    travelDate: ''
+  });
+  const [reviewSubmitting, setReviewSubmitting] = useState<boolean>(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState<boolean>(false);
   const [selectedWeatherLoc, setSelectedWeatherLoc] = useState<string | null>(null);
   
   // Filtering packages
@@ -739,6 +751,79 @@ export default function App() {
       }
     } catch (e) {
       console.error("Failed to fetch packages from server", e);
+    }
+  };
+
+  const fetchReviews = async () => {
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/api/reviews`);
+      if (res.ok) {
+        const data = await res.json();
+        setReviews(data);
+      }
+    } catch (e) {
+      console.error("Failed to fetch reviews from server", e);
+    }
+  };
+
+  const handleReviewSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { packageId, customerName, rating, reviewText, travelDate } = submitReviewForm;
+    
+    if (!packageId) {
+      triggerNotification(language === 'HI' ? "कृपया समीक्षा के लिए एक टूर पैकेज चुनें।" : "Please select a completed tour package to review.", "error");
+      return;
+    }
+    if (!customerName.trim()) {
+      triggerNotification(language === 'HI' ? "कृपया अपना नाम दर्ज करें।" : "Please enter your name.", "error");
+      return;
+    }
+    if (!reviewText.trim() || reviewText.trim().length < 10) {
+      triggerNotification(
+        language === 'HI' ? "आपकी समीक्षा कम से कम 10 वर्णों की होनी चाहिए।" : "Your review must be at least 10 characters long.",
+        "error"
+      );
+      return;
+    }
+
+    setReviewSubmitting(true);
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/api/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          packageId,
+          customerName: customerName.trim(),
+          rating,
+          reviewText: reviewText.trim(),
+          travelDate: travelDate || new Date().toLocaleString(language === 'HI' ? 'hi-IN' : 'en-US', { month: 'long', year: 'numeric' })
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setReviews(data.reviews);
+        setPackages(data.packages);
+        setSubmitReviewForm({
+          packageId: '',
+          customerName: '',
+          rating: 5,
+          reviewText: '',
+          travelDate: ''
+        });
+        triggerNotification(
+          language === 'HI' ? "आपकी बहुमूल्य समीक्षा सुरक्षित रूप से पोस्ट कर दी गई है! धन्यवाद!" : "Your valuable review has been safely posted! Thank you!",
+          "success"
+        );
+      } else {
+        const fail = await res.json();
+        triggerNotification(fail.error || "Failed to submit review.", "error");
+      }
+    } catch (err) {
+      console.error("Review submission error:", err);
+      triggerNotification("Network connection failure.", "error");
+    } finally {
+      setReviewSubmitting(false);
     }
   };
 
@@ -1065,6 +1150,7 @@ export default function App() {
 
   useEffect(() => {
     fetchPackages();
+    fetchReviews();
     fetchBookings();
     fetchCustomers();
     fetchGallery();
@@ -3364,6 +3450,45 @@ export default function App() {
                               </ul>
                             </div>
                           </div>
+
+                          {/* Package-specific reviews display inside card */}
+                          <div className="pt-3.5 border-t border-slate-200 mt-2 space-y-2">
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-[#002366] block font-mono">
+                              💬 {language === 'HI' ? 'अतिथि समीक्षाएं और रेटिंग' : 'Guest Reviews & Ratings'}
+                            </span>
+                            {reviews.filter(r => r.packageId === pack.id).length === 0 ? (
+                              <p className="text-[11px] text-slate-400 italic">
+                                {language === 'HI' ? 'इस यात्रा के लिए अभी तक कोई अतिथि समीक्षा नहीं जोड़ी गई है।' : 'No guest reviews have been submitted for this package yet.'}
+                              </p>
+                            ) : (
+                              <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                                {reviews.filter(r => r.packageId === pack.id).map((rev) => (
+                                  <div key={rev.id} className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
+                                    <div className="flex justify-between items-center">
+                                      <span className="font-bold text-[#002366]">{rev.customerName}</span>
+                                      <div className="flex items-center gap-0.5">
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                          <Star 
+                                            key={i} 
+                                            className={`w-3 h-3 ${
+                                              i < rev.rating ? 'fill-[#F4C430] text-[#F4C430]' : 'text-slate-200'
+                                            } stroke-none`} 
+                                          />
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <p className="text-[11.5px] leading-relaxed italic text-slate-600 font-sans font-light">
+                                      "{rev.reviewText}"
+                                    </p>
+                                    <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 pt-0.5">
+                                      <span>{language === 'HI' ? 'यात्रा:' : 'Travelled:'} {rev.travelDate}</span>
+                                      <span className="text-emerald-600 font-bold">✓ Verified Guest</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       )}
 
@@ -4252,6 +4377,231 @@ export default function App() {
           </div>
         </section>
 
+        {/* SECTION: USER TESTIMONIALS AND REVIEW SUBMISSION */}
+        <section id="guest-testimonials" className="bg-[#002366]/5 rounded-3xl p-8 sm:p-12 border border-slate-200 scroll-mt-24 space-y-8 relative overflow-hidden">
+          
+          <div className="absolute right-4 bottom-4 opacity-10 pointer-events-none select-none">
+            <Star className="w-48 h-48 text-[#F4C430]" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+            
+            {/* Left Column: Form to submit testimonial */}
+            <div className="lg:col-span-4 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-lg space-y-6">
+              <div>
+                <span className="text-[10px] font-mono uppercase bg-emerald-500/10 text-emerald-800 px-3 py-1 rounded inline-block font-bold">
+                  {language === 'HI' ? 'अपनी यात्रा साझा करें' : 'Share Your Experience'}
+                </span>
+                <h3 className="text-2xl font-serif font-bold text-[#002366] mt-2">
+                  {language === 'HI' ? 'समीक्षा सबमिट करें' : 'Submit Tour Review'}
+                </h3>
+                <p className="text-xs text-slate-500 mt-1">
+                  {language === 'HI' 
+                    ? 'आपकी बहुमूल्य प्रतिक्रिया अन्य यात्रियों को कश्मीर की सुंदरता खोजने में मदद करती है।' 
+                    : 'Your valuable feedback helps other travelers discover the pure magic of Kashmir.'}
+                </p>
+              </div>
+
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-[#002366] tracking-wider block mb-1 font-mono">
+                    {language === 'HI' ? 'अंतिम यात्रा पैकेज *' : 'Completed Tour Package *'}
+                  </label>
+                  <select
+                    required
+                    value={submitReviewForm.packageId}
+                    onChange={(e) => setSubmitReviewForm({ ...submitReviewForm, packageId: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#F4C430]"
+                  >
+                    <option value="">{language === 'HI' ? '-- चुनें --' : '-- Choose Package --'}</option>
+                    {packages.map((p) => (
+                      <option key={p.id} value={p.id}>{p.title}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-[#002366] tracking-wider block mb-1 font-mono">
+                    {language === 'HI' ? 'आपका नाम *' : 'Your Full Name *'}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    maxLength={50}
+                    placeholder={language === 'HI' ? 'उदा. अमित शर्मा' : 'e.g. Amit Sharma'}
+                    value={submitReviewForm.customerName}
+                    onChange={(e) => setSubmitReviewForm({ ...submitReviewForm, customerName: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#F4C430]"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] uppercase font-bold text-[#002366] tracking-wider block mb-1 font-mono">
+                      {language === 'HI' ? 'यात्रा का महीना' : 'Month of Travel'}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={language === 'HI' ? 'उदा. मई 2026' : 'e.g. May 2026'}
+                      value={submitReviewForm.travelDate}
+                      onChange={(e) => setSubmitReviewForm({ ...submitReviewForm, travelDate: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#F4C430]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold text-[#002366] tracking-wider block mb-1 font-mono">
+                      {language === 'HI' ? 'रेटिंग (सितारे) *' : 'Rating (Stars) *'}
+                    </label>
+                    <div className="flex gap-1 items-center h-9">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setSubmitReviewForm({ ...submitReviewForm, rating: star })}
+                          className="focus:outline-none transition-transform active:scale-125 cursor-pointer"
+                        >
+                          <Star 
+                            className={`w-5 h-5 ${
+                              star <= submitReviewForm.rating 
+                                ? 'fill-[#F4C430] text-[#F4C430]' 
+                                : 'text-slate-300 hover:text-amber-400'
+                            }`} 
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-[#002366] tracking-wider block mb-1 font-mono">
+                    {language === 'HI' ? 'आपकी समीक्षा (न्यूनतम 10 वर्ण) *' : 'Your Detailed Testimony (Min 10 chars) *'}
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    maxLength={550}
+                    placeholder={
+                      language === 'HI' 
+                        ? 'अपनी हाउस बोट stay, गाइड, ड्राइवर, खान-पान या नज़ारों के बारे में लिखें...' 
+                        : 'Share details about houseboat stays, guides, cuisine, or gorgeous views...'
+                    }
+                    value={submitReviewForm.reviewText}
+                    onChange={(e) => setSubmitReviewForm({ ...submitReviewForm, reviewText: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#F4C430] resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={reviewSubmitting}
+                  className="w-full bg-[#002366] hover:bg-[#F4C430] text-white hover:text-[#002366] py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {reviewSubmitting ? (
+                    <span>{language === 'HI' ? 'सबमिट किया जा रहा है...' : 'Saving...'}</span>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>{language === 'HI' ? 'समीक्षा साझा करें' : 'Post Testimonial'}</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Right Column: List/Grid of existing reviews */}
+            <div className="lg:col-span-8 space-y-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-205 pb-4">
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-[#002366]">
+                    {language === 'HI' ? 'हमारे मेहमानों की जुबानी' : 'Guest Love Letters & Stories'}
+                  </h3>
+                  <p className="text-xs text-slate-550 mt-0.5 font-light">
+                    {language === 'HI' 
+                      ? 'दुनियाभर के यात्रियों द्वारा सत्यापित प्रत्यक्ष कश्मीरी अनुभव।' 
+                      : 'Unfiltered, verified Kashmiri reviews by direct travelers from across the globe.'}
+                  </p>
+                </div>
+
+                {/* Avg Rating overview */}
+                {reviews.length > 0 && (
+                  <div className="bg-[#F4C430]/10 border border-[#F4C430]/30 rounded-2xl px-4 py-2 flex items-center gap-3">
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4.5 h-4.5 fill-[#F4C430] text-[#F4C430] stroke-none" />
+                      <span className="font-serif font-black text-xl text-[#002366]">
+                        {(reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)}
+                      </span>
+                    </div>
+                    <div className="border-l border-slate-300 pl-3">
+                      <p className="text-[9px] font-mono font-bold text-[#002366] uppercase">{language === 'HI' ? 'औसत रेटिंग' : 'Global Score'}</p>
+                      <p className="text-[10px] font-bold text-slate-600">{reviews.length} {language === 'HI' ? 'मेहमान' : 'Guests'}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Reviews grid container */}
+              {reviews.length === 0 ? (
+                <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center">
+                  <p className="text-sm text-slate-550 italic">No testimonials uploaded yet. Be the first to express your love for Kashmir!</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[480px] overflow-y-auto pr-2">
+                  {reviews.map((rev) => {
+                    const matchedPkg = packages.find(p => p.id === rev.packageId);
+                    return (
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        key={rev.id}
+                        className="bg-white p-5 rounded-2xl border border-slate-200/85 shadow-sm hover:shadow-md hover:border-[#F4C430]/30 transition-all flex flex-col justify-between"
+                      >
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-bold text-sm text-[#002366]">{rev.customerName}</p>
+                              <p className="text-[9px] text-slate-400 font-mono">{language === 'HI' ? 'यात्रा:' : 'Travelled:'} {rev.travelDate}</p>
+                            </div>
+                            <div className="flex gap-0.5">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <Star 
+                                  key={i} 
+                                  className={`w-3.5 h-3.5 ${
+                                    i < rev.rating ? 'fill-[#F4C430] text-[#F4C430]' : 'text-slate-200'
+                                  } stroke-none`} 
+                                />
+                              ))}
+                            </div>
+                          </div>
+
+                          {matchedPkg && (
+                            <span className="text-[9px] font-bold font-mono text-orange-600 uppercase bg-orange-50 px-20 py-0.5 rounded tracking-wide inline-block max-w-full truncate">
+                              🏷️ {matchedPkg.title}
+                            </span>
+                          )}
+
+                          <p className="text-xs text-slate-650 leading-relaxed italic font-light">
+                            "{rev.reviewText}"
+                          </p>
+                        </div>
+
+                        <div className="border-t border-slate-100 pt-2.5 mt-3 flex justify-between items-center text-[9px] font-mono text-slate-400">
+                          <span className="text-emerald-700 font-bold flex items-center gap-0.5">
+                            <ShieldCheck className="w-3.5 h-3.5 inline text-emerald-600" strokeWidth={3} /> {language === 'HI' ? 'सत्यापित मेहमान' : 'Verified Guest'}
+                          </span>
+                          <span>{new Date(rev.createdAt).toLocaleDateString()}</span>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+          </div>
+        </section>
+
         {/* SECTION: GOOGLE MAPS EMBED & CONTACT DESK */}
         <section id="contact-desk" className="grid grid-cols-1 lg:grid-cols-12 gap-8 scroll-mt-24">
           
@@ -5075,12 +5425,167 @@ export default function App() {
               <span>•</span>
               <a href="#scenic-photo-album" className="hover:text-white font-semibold text-[#F4C430]">Scenic Photo Album</a>
               <span>•</span>
+              <button onClick={() => setShowPrivacyModal(true)} className="hover:text-[#F4C430] cursor-pointer transition-colors focus:outline-none">
+                {language === 'HI' ? 'गोपनीयता नीति' : 'Privacy Policy'}
+              </button>
+              <span>•</span>
               <a href="#contact-desk" className="hover:text-white">Google Maps Desk</a>
             </div>
           </div>
 
         </div>
       </footer>
+
+      {/* SECTION: PRIVACY POLICY DIALOG MODAL */}
+      {showPrivacyModal && (
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-2xl w-full border-2 border-[#F4C430] p-6 sm:p-8 text-slate-900 relative animate-fade-in flex flex-col max-h-[85vh]">
+            <button 
+              onClick={() => setShowPrivacyModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-[#002366] bg-slate-100 rounded-full p-1.5 transition-colors cursor-pointer z-10"
+              id="close-privacy-btn"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 border-b border-slate-150 pb-4 mb-4 shrink-0">
+              <div className="w-10 h-10 bg-[#002366]/10 rounded-full flex items-center justify-center text-[#002366] border border-[#002366]/20">
+                <ShieldCheck className="w-6 h-6 stroke-[2]" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold font-serif text-[#002366]" id="privacy-modal-title">
+                  {language === 'HI' ? 'गोपनीयता नीति' : 'Privacy Policy'}
+                </h4>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">
+                  {language === 'HI' ? 'सुरक्षित और विनियमित पर्यटन डेटा अनुपालन' : 'Secure & Regulated Tourism Data Compliance'}
+                </p>
+              </div>
+            </div>
+
+            <div className="overflow-y-auto space-y-4 pr-1 text-slate-700 text-xs leading-relaxed font-sans flex-1" id="privacy-modal-body">
+              {language === 'HI' ? (
+                <>
+                  <p className="font-semibold text-slate-900 text-sm">
+                    शीनोर जर्नल्स लिमिटेड में, हम अपने मेहमानों और वैश्विक यात्रियों की गोपनीयता का अत्यधिक सम्मान करते हैं। यह नीति यह बताती है कि हम जम्मू-कश्मीर (भारत) में यात्रा सुरक्षित करने के लिए आपके PII (व्यक्तिगत पहचान योग्य जानकारी) को कैसे एकत्र, उपयोग और सुरक्षित करते हैं।
+                  </p>
+
+                  <div className="space-y-1.5 p-3.5 bg-amber-50/50 rounded-2xl border border-[#F4C430]/30">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">१. हम कौन सी जानकारी एकत्र करते हैं</h5>
+                    <p>
+                      जब आप हमारी वेबसाइट का उपयोग करते हैं या यात्रा बुक करते हैं, तो हम निम्नलिखित जानकारी एकत्र कर सकते हैं:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 mt-1 text-[11px]">
+                      <li><strong>बुकिंग विवरण:</strong> पूरा नाम, ईमेल पता, मोबाइल नंबर, और आवास प्राथमिकताएं।</li>
+                      <li><strong>वित्तीय अनुपालन (PAN):</strong> जम्मू-कश्मीर में सीमावर्ती पर्यटन नियमों के अधीन वित्तीय लेनदेन को प्रमाणित करने के लिए भारतीय पैन कार्ड विवरण।</li>
+                      <li><strong>यात्रा संबंधी डेटा:</strong> आगमन तिथियां, सह-यात्रियों की संख्या, और अनुकूलित यात्रा योजना की आवश्यकताएं।</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">२. सूचना का उपयोग और साझा करना</h5>
+                    <p>
+                      आपकी जानकारी का उपयोग केवल वैध बुकिंग सेवाएं प्रदान करने के लिए किया जाता है:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 mt-1 text-[11px]">
+                      <li>कश्मीर घाटी में स्थानीय अधिकृत पर्यटक गाइडों और परिवहन संचालकों के साथ बुकिंग समन्वय।</li>
+                      <li>सुरक्षित भुगतान गेटवे (जैसे रेज़रपे) के माध्यम से वित्तीय सुदृढ़ीकरण और कर ऑडिट।</li>
+                      <li>पर्यटन मंत्रालय, जम्मू-कश्मीर सरकार के नियमों के तहत अनिवार्य पर्यटक रजिस्टरों का रख-रखाव।</li>
+                    </ul>
+                    <p className="text-[11px] text-amber-700 italic font-mono">
+                      * हम आपकी व्यक्तिगत जानकारी को किसी भी विज्ञापन नेटवर्क के साथ कभी भी साझा या विपणन नहीं करते हैं।
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">३. डेटा सुरक्षा और सुरक्षा उपाय</h5>
+                    <p>
+                      हम आपकी जानकारी की सुरक्षा के लिए अत्याधुनिक 256-बिट सुरक्षित टीएलएस कूटलेखन (TLS encryption) लागू करते हैं। हमारी बैकएंड डेटाबेस फाइलें सर्वर-साइड अनधिकृत पहुंच से पूर्णतः सुरक्षित और सुरक्षित रखी जाती हैं।
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">४. भुगतान जानकारी सुरक्षा</h5>
+                    <p>
+                      अंतिम बुकिंग और एस्क्रो भुगतान सीधे अधिकृत भुगतानों के लिए उद्योग-मानक PCI-DSS अनुपालन वाले पेमेंट गेटवे के माध्यम से संसाधित किए जाते हैं। शीनोर जर्नल्स आपके किसी भी डेबिट/क्रेडिट कार्ड विवरण को संग्रहित नहीं करता है।
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">५. आपके अधिकार और शिकायत निवारण</h5>
+                    <p>
+                      आपको अपने व्यक्तिगत डेटा तक पहुँचने, संशोधित करने या हटाने का अनुरोध करने का पूरा अधिकार है। किसी भी प्रश्न या शिकायत के लिए, कृपया हमारे सिंहपोरा, बारामूला स्थित मुख्य कार्यालय पर हमारे शिकायत अधिकारी से संपर्क करें।
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="font-semibold text-slate-900 text-sm">
+                    At Sheenora Journeys Ltd., we hold a deep and sacred commitment to the protection of our guests' privacy. This policy explains how we collect, process, and safeguard your Personally Identifiable Information (PII) to facilitate safe, premium tours across Jammu & Kashmir.
+                  </p>
+
+                  <div className="space-y-1.5 p-3.5 bg-amber-50/50 rounded-2xl border border-[#F4C430]/30">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">1. Information We Collect</h5>
+                    <p>
+                      To deliver high-fidelity custom itineraries, transport arrangements, and digital tour verification certificates, we collect:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 mt-1 text-[11px]">
+                      <li><strong>Identification & Contacts:</strong> Full name, telephone coordinates, and verified email address.</li>
+                      <li><strong>Financial Audit (PAN):</strong> Indian PAN numbers where legally mandated for booking audit purposes (specifically under J&K high-risk border tourism guidelines).</li>
+                      <li><strong>Transit Elements:</strong> Specified travel windows, co-passenger directories, and bespoke customization logs.</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">2. Use of Collected Data</h5>
+                    <p>
+                      We utilize, analyze, and map your inputs strictly for premium execution of your tours:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 mt-1 text-[11px]">
+                      <li>Coordinating secure transfers with licensed local guides and houseboat associations in Srinagar, Gulmarg, and Pahalgam.</li>
+                      <li>Generating financial order sheets processed securely through top-tier PCI-DSS compliant providers (e.g. Razorpay).</li>
+                      <li>Maintaining the governmental ledger mandated under the J&K Registration of Tourist Trade Act.</li>
+                    </ul>
+                    <p className="text-[11px] text-amber-700 italic font-mono">
+                      * We respect your attention: we do not trade, lease, or distribute PII coordinates to external advertising firms or networks.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">3. Data Security & Cryptographic Handshakes</h5>
+                    <p>
+                      Your sessions are guarded with 256-bit safe Secure TLS/SSL encryption algorithms. Active traveler databases and dossier listings are archived server-side with enterprise access-control layers to block trace leakage.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#052666] font-serif text-sm">4. Secure Gateway Processing</h5>
+                    <p>
+                      All monetary transactions, billing requests, and corporate deposits are managed directly in secure frames provided by our payment gateway providers. Sensitive financial cards or login credentials never touch Sheenora's infrastructure.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h5 className="font-bold text-[#002366] font-serif text-sm">5. Grievances & Contact Address</h5>
+                    <p>
+                      Guests have full legislative rights to audit or purge their traveler record from our directory. For any inquiries or regulatory requests, please dispatch a certified message to the Privacy Officer, Sheenora Journeys Ltd., Singhpora, Baramulla, Jammu & Kashmir - 193121.
+                    </p>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="pt-4 border-t border-slate-150 flex justify-end shrink-0 pt-3">
+              <button
+                onClick={() => setShowPrivacyModal(false)}
+                className="bg-[#002366] hover:bg-[#F4C430] text-white hover:text-[#002366] px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer focus:outline-none"
+                id="close-privacy-bottom-btn"
+              >
+                {language === 'HI' ? 'स्वीकार करें' : 'Accept & Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* SECTION: ADMIN PASSWORD AUTHORIZATION DIALOG MODAL */}
       {showAdminPasswordModal && (

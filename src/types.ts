@@ -80,3 +80,13 @@ export interface GalleryItem {
   altitude: string;
   lore: string;
 }
+
+export interface TestimonialReview {
+  id: string;
+  packageId: string;
+  customerName: string;
+  rating: number;
+  reviewText: string;
+  travelDate: string;
+  createdAt: string;
+}
